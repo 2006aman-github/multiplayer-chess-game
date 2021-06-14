@@ -1,0 +1,14 @@
+.board {
+  width: 36em;
+  height: 36em;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  place-items: center;
+}
+.even__block {
+  background-color: #779556;
+}
+.odd__block {
+  background-color: white;
+}
