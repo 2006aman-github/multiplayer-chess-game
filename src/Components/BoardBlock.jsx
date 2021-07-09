@@ -51,6 +51,7 @@ function BoardBlock({
   const handleMovementBlock = () => {
     const pieceType = currentBlockPiece?.split('-')[1];
     let movementBlocks;
+    verticalPoint = parseInt(verticalPoint);
     if (pieceType === 'soldier') {
       movementBlocks = pawnRules(
         verticalPoint,

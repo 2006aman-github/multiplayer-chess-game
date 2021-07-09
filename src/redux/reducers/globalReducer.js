@@ -4,12 +4,12 @@ import { horizontalAxis, pieceImages, StartBoardPosition } from '../../utils';
 const initialGlobalState = {
   initialPiecesPosition: StartBoardPosition,
   validRows: ['1', '2'],
-  myColor: true,
+  myColor: 'white',
   selectedBlock: null,
   movableBlocks: {},
   playerName: null,
-  myTurn: null,
-  opponent: {},
+  myTurn: true,
+  opponent: { id: 'ddasd', name: 'shitguy' },
   gameplayStatusMessage: 'Searching for player...',
 };
 
@@ -51,11 +51,6 @@ export const globalReducer = (state = initialGlobalState, action) => {
         } else {
           newPiece = pieceImages.whiteQueen;
         }
-      } else {
-        console.log(
-          action.payload.updatedPos.split('')[0] == 8,
-          initialPiecesPosition[selectedBlock]?.includes('soldier')
-        );
       }
       const updatedState = {
         ...initialPiecesPosition,
@@ -69,7 +64,7 @@ export const globalReducer = (state = initialGlobalState, action) => {
         ...state,
         initialPiecesPosition: updatedState,
         selectedBlock: null,
-        myTurn: false,
+        // myTurn: false,
       };
     case handleGamePlayStatus:
       return {
@@ -122,19 +117,21 @@ export const globalReducer = (state = initialGlobalState, action) => {
 
     case updateOpponentMove:
       if (!action.payload) {
+        console.log('hello no payload here dude wtf are you doing...!!');
         return state;
       }
       const updatedX = action.payload.updatedPos?.split('')[1];
       const updatedY = action.payload.updatedPos?.split('')[0];
-
       action.payload.updatedPos =
         9 -
-        updatedY +
+        parseInt(updatedY) +
         horizontalAxis[
-          horizontalAxis.length -
-            (1 -
-              horizontalAxis.indexOf(action.payload.updatedPos?.split('')[1]))
+          horizontalAxis.length - 1 - horizontalAxis.indexOf(updatedX)
         ];
+      // console.log(
+      //   9 - parseInt(updatedY),
+      //   horizontalAxis.length - 1 - horizontalAxis.indexOf(updatedX)
+      // );
 
       action.payload.selectedBlock =
         9 -
@@ -144,6 +141,7 @@ export const globalReducer = (state = initialGlobalState, action) => {
             1 -
             horizontalAxis.indexOf(action.payload.selectedBlock?.split('')[1])
         ];
+      console.log(action.payload.updatedPos, action.payload.selectedBlock);
       return {
         ...state,
         initialPiecesPosition: {

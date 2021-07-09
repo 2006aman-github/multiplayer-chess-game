@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import BoardBlock from "./BoardBlock";
-import "./chessboard.css";
-import { horizontalAxis, initialPiecesPosition, pieceImages } from "../utils";
-import { useDispatch, useSelector } from "react-redux";
-import { globalReducerActions } from "../redux/reducers/globalReducer";
+import React, { useState, useEffect } from 'react';
+import BoardBlock from './BoardBlock';
+import './chessboard.css';
+import { horizontalAxis, initialPiecesPosition, pieceImages } from '../utils';
+import { useDispatch, useSelector } from 'react-redux';
+import { globalReducerActions } from '../redux/reducers/globalReducer';
 
 function ChessBoard() {
   const [focusBlock, setFocusBlock] = useState(null);

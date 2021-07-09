@@ -36,20 +36,3 @@
   color: grey;
   place-content: center;
 }
-.hero__right button {
-  border: none;
-  outline: none;
-  padding: 1em 2em;
-  font-size: 1.5em;
-  text-transform: capitalize;
-  background-color: #719e44;
-  color: white;
-  border-radius: 10px;
-  cursor: pointer;
-}
-.hero__right button:hover {
-  background-color: #61853d;
-}
-.hero__right button:active {
-  background-color: #42661e;
-}

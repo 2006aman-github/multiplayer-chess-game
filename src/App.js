@@ -9,10 +9,7 @@ import LandingPage from './Components/LandingPage';
 
 function App() {
   const dispatch = useDispatch();
-  useEffect(() => {
-    const res = connectedSocket?.disconnect();
-    console.log(res);
-  }, []);
+
   return (
     <Router>
       <div className="App">

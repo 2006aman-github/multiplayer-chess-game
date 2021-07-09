@@ -14,9 +14,9 @@ export const pieceImages = {
 };
 export const StartBoardPosition = {
   '1d': pieceImages.whiteKing,
-  '8e': pieceImages.blackKing,
+  '8e': pieceImages.blackQueen,
   '1e': pieceImages.whiteQueen,
-  '8d': pieceImages.blackQueen,
+  '8d': pieceImages.blackKing,
   '8a': pieceImages.blackRook,
   '8h': pieceImages.blackRook,
   '8b': pieceImages.blackKnight,

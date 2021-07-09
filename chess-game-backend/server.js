@@ -26,7 +26,6 @@ io.on('connection', (socket) => {
   // check if rooms available for player to join
   let roomId = uuidv4();
   let isRoomAvailable = false;
-
   for (const room in rooms) {
     const key = rooms[room];
 
@@ -37,21 +36,21 @@ io.on('connection', (socket) => {
       players[socket.id] = {
         roomId: key,
         color: 'black',
+        name: socket.da,
       };
       isRoomAvailable = true;
       socket.emit('server-connection-message', {
         message: 'hey client',
         roomId: key,
         color: 'black',
-        opponent: {
-          id: socket.id,
-        },
       });
-      socket.to(key).emit('opponent-connected', {
+      socket.emit('opponent-connected', {
         message: 'opponent connected',
+        note: 'special data only to the first connected user in the room',
         data: {
           id: socket.id,
           roomId,
+          name: players[Array.from(io.sockets.adapter.rooms.get(key))[0]]?.name,
         },
       });
       socket.to(key).emit('your-turn', { message: 'Its your turn now' });
@@ -77,12 +76,17 @@ io.on('connection', (socket) => {
 
   // when a player joins the match
   socket.on('player-joined-verify', (name) => {
-    console.log(players[socket.id].roomId);
     players[socket.id] = { ...players[socket.id], name, id: socket.id };
+    console.log(
+      players[socket.id],
+      players[socket.id].roomId,
+      'verified-player'
+    );
     socket.to(players[socket.id].roomId).emit('opponent-connected', {
       message: 'opponent connected',
       data: {
         id: socket.id,
+        name,
         roomId,
       },
     });

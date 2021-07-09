@@ -1,4 +1,4 @@
-import { horizontalAxis } from "./utils";
+import { horizontalAxis } from './utils';
 
 export const rookRules = (
   horizontalPoint,
@@ -41,7 +41,6 @@ export const rookRules = (
       if (myPieceOnWay) {
         break;
       } else {
-        console.log("bruhh");
         horizontalMovableBlocks.push(verticalPoint + horizontalAxis[x]);
         break;
       }
@@ -105,18 +104,20 @@ const pawnRules = (
     x <= horizontalAxis.indexOf(horizontalPoint) + 1;
     x++
   ) {
-    movableBlocks.push(parseInt(verticalPoint) + 1 + horizontalAxis[x]);
-    // if (
-    //   !initialPiecesPosition[verticalPoint + horizontalPoint]?.includes(myColor)
-    // ) {
-    //   if (x !== horizontalAxis.indexOf(horizontalPoint)) {
-    //   }
-    //   console.log(horizontalAxis[x], horizontalPoint);
-    // }
+    if (
+      (!initialPiecesPosition[verticalPoint + 1 + horizontalAxis[x]] &&
+        x !== horizontalAxis.indexOf(horizontalPoint)) ||
+      initialPiecesPosition[verticalPoint + 1 + horizontalAxis[x]]?.includes(
+        myColor
+      )
+    ) {
+      continue;
+    }
     // console.log("hey");
+    movableBlocks.push(parseInt(verticalPoint) + 1 + horizontalAxis[x]);
   }
 
-  // console.log(movableBlocks);
+  console.log(movableBlocks);
 
   return movableBlocks;
 };

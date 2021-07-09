@@ -1,0 +1,1 @@
+const isCheck = (movedPosition, color) => {};
